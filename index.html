@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Inscripción</title>
+    <link rel="icon" type="image/jpeg" href="imagenes/logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('imagenes/fondo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 6rem;
+            height: 6rem;
+            object-fit: contain;
+        }
+
+        @media (min-width: 640px) {
+            .logo {
+                width: 8rem;
+                height: 8rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .logo {
+                width: 12rem;
+                height: 12rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex justify-center items-center min-h-screen">
+    <div class="form-container max-w-md w-full mx-4">
+        <div class="flex justify-center mb-6">
+            <img src="imagenes/logo.jpg" alt="Cursillo Ampere" class="logo">
+        </div>
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Formulario de Inscripción</h1>
+        <form id="registroForm">
+            <div class="mb-4">
+                <label for="nombre" class="block text-gray-700 font-semibold mb-2">Nombre y Apellido:</label>
+                <input type="text" id="nombre" name="nombre" class="w-full p-2 border border-gray-300 rounded-md"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label for="telefono" class="block text-gray-700 font-semibold mb-2">Número de Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" class="w-full p-2 border border-gray-300 rounded-md"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label for="cedula" class="block text-gray-700 font-semibold mb-2">Cédula:</label>
+                <input type="text" id="cedula" name="cedula" class="w-full p-2 border border-gray-300 rounded-md"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label for="correo" class="block text-gray-700 font-semibold mb-2">Correo:</label>
+                <input type="email" id="correo" name="correo" class="w-full p-2 border border-gray-300 rounded-md"
+                    required>
+            </div>
+            <button type="submit"
+                class="w-full bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-700 transition duration-200">
+                Enviar
+            </button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("registroForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            var data = new FormData(e.target);
+
+            fetch("https://script.google.com/macros/s/YOUR_WEB_APP_URL/exec", {
+                method: "POST",
+                body: data
+            })
+                .then(response => response.text())
+                .then(result => {
+                    alert("Formulario enviado exitosamente!");
+                    e.target.reset();
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Hubo un error al enviar el formulario.");
+                });
+        });
+    </script>
+</body>
+
+</html>
